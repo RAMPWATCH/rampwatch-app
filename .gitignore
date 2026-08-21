@@ -12,3 +12,4 @@ coverage/
 .DS_Store
 .pglite/
 *.tsbuildinfo
+next-env.d.ts
