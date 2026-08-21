@@ -43,6 +43,13 @@
       "when": 1787310147284,
       "tag": "0005_alert_configs",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1787310240232,
+      "tag": "0006_x402_transactions",
+      "breakpoints": true
     }
   ]
 }
