@@ -29,6 +29,13 @@
       "when": 1787310083168,
       "tag": "0003_sep_check_results",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1787310121206,
+      "tag": "0004_domain_verifications",
+      "breakpoints": true
     }
   ]
 }
