@@ -5,3 +5,4 @@ export * from "./sepCheckResults";
 export * from "./domainVerifications";
 export * from "./alertConfigs";
 export * from "./x402Transactions";
+export * from "./platformSettings";
