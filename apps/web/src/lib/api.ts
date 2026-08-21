@@ -26,7 +26,12 @@ export interface AnchorDetail {
   displayName: string | null;
   network: "mainnet" | "testnet";
   claimStatus: "unclaimed" | "pending" | "claimed";
-  uptimeHistory: { checkRunId: string; status: CheckStatus; startedAt: string }[];
+  uptimeHistory: {
+    checkRunId: string;
+    status: CheckStatus;
+    startedAt: string;
+    avgLatencyMs: number | null;
+  }[];
   latestSepResults: SepResult[];
 }
 
