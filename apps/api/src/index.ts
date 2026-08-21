@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { anchorsRouter } from "./routes/anchors";
 import { publicRouter } from "./routes/public";
+import { authRouter } from "./routes/auth";
 
 const app = express();
 app.use(cors());
@@ -14,6 +15,7 @@ app.get("/health", (_req, res) => {
 
 app.use("/api/v1", anchorsRouter);
 app.use("/api/v1", publicRouter);
+app.use("/api/v1", authRouter);
 
 const port = Number(process.env.PORT ?? 4000);
 app.listen(port, () => {
