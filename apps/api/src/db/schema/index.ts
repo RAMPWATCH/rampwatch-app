@@ -3,3 +3,4 @@ export * from "./anchors";
 export * from "./checkRuns";
 export * from "./sepCheckResults";
 export * from "./domainVerifications";
+export * from "./alertConfigs";
