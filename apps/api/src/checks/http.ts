@@ -100,6 +100,13 @@ export async function fetchText(
 
       if (!response.ok) {
         lastError = `HTTP ${response.status} ${response.statusText}`;
+        // A 4xx is a deterministic answer ("not found", "forbidden") within
+        // the retry window, not a transient blip — retrying wastes time
+        // without changing the outcome. Only network errors and 5xx are
+        // worth retrying.
+        if (response.status >= 400 && response.status < 500) {
+          return { ok: false, errorDetail: lastError, latencyMs: Date.now() - startedAt };
+        }
       } else {
         return {
           ok: true,
