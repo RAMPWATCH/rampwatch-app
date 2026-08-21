@@ -25,6 +25,8 @@ export interface FetchTextOptions {
   timeoutMs?: number;
   retries?: number;
   headers?: Record<string, string>;
+  method?: string;
+  body?: string;
 }
 
 const DEFAULT_TIMEOUT_MS = 8_000;
@@ -56,6 +58,21 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// exactOptionalPropertyTypes rejects passing `method`/`body: undefined`
+// explicitly, so only include them when actually set.
+function buildRequestInit(
+  signal: AbortSignal,
+  options: FetchTextOptions,
+): RequestInit {
+  const init: RequestInit = {
+    signal,
+    headers: { accept: "*/*", ...options.headers },
+  };
+  if (options.method !== undefined) init.method = options.method;
+  if (options.body !== undefined) init.body = options.body;
+  return init;
+}
+
 /**
  * Fetches a URL as text with a hard timeout and bounded retries. Never
  * throws — every network/parsing failure is surfaced as a typed result so
@@ -77,10 +94,7 @@ export async function fetchText(
     const timer = setTimeout(() => controller.abort(), timeoutMs);
 
     try {
-      const response = await fetch(url, {
-        signal: controller.signal,
-        headers: { accept: "*/*", ...options.headers },
-      });
+      const response = await fetch(url, buildRequestInit(controller.signal, options));
       const text = await response.text();
       clearTimeout(timer);
 
@@ -109,6 +123,53 @@ export async function fetchText(
     errorDetail: lastError,
     latencyMs: Date.now() - startedAt,
   };
+}
+
+export interface ProbeStatusSuccess {
+  reached: true;
+  status: number;
+  latencyMs: number;
+}
+
+export interface ProbeStatusFailure {
+  reached: false;
+  errorDetail: string;
+  latencyMs: number;
+}
+
+export type ProbeStatusResult = ProbeStatusSuccess | ProbeStatusFailure;
+
+/**
+ * Makes a single request and reports whether the server responded at all,
+ * regardless of status code — used for reachability checks on endpoints
+ * that are expected to reject an unauthenticated probe (e.g. SEP-24's
+ * interactive deposit/withdraw endpoints), where a 401/403 is a pass.
+ */
+export async function probeStatus(
+  url: string,
+  options: FetchTextOptions = {},
+): Promise<ProbeStatusResult> {
+  const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  const startedAt = Date.now();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, buildRequestInit(controller.signal, options));
+    clearTimeout(timer);
+    return {
+      reached: true,
+      status: response.status,
+      latencyMs: Date.now() - startedAt,
+    };
+  } catch (error) {
+    clearTimeout(timer);
+    return {
+      reached: false,
+      errorDetail: describeFetchError(error, timeoutMs),
+      latencyMs: Date.now() - startedAt,
+    };
+  }
 }
 
 /**
