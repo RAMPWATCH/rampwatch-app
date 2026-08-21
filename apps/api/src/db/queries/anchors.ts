@@ -5,6 +5,37 @@ import { anchors, checkRuns, sepCheckResults, type Anchor, type CheckRun } from 
 export interface AnchorWithStatus extends Anchor {
   latestStatus: CheckRun["status"] | null;
   lastCheckedAt: CheckRun["startedAt"] | null;
+  assets: string[];
+}
+
+interface AssetBearingRawResponse {
+  depositAssets?: unknown;
+  withdrawAssets?: unknown;
+  assets?: unknown;
+}
+
+// SEP-38's asset identifiers are SEP-38 CAAP form ("stellar:USDC:G...",
+// "stellar:native", "iso4217:USD") rather than the bare codes SEP-6/24 use
+// ("USDC", "native", "USD") — normalize to the bare code so the directory
+// filter doesn't show the same asset twice under two spellings.
+function normalizeAssetCode(code: string): string {
+  const parts = code.split(":");
+  return parts.length >= 2 ? (parts[1] as string) : code;
+}
+
+function extractAssets(rawResponse: unknown): string[] {
+  if (typeof rawResponse !== "object" || rawResponse === null) {
+    return [];
+  }
+  const { depositAssets, withdrawAssets, assets } = rawResponse as AssetBearingRawResponse;
+  const merged = [
+    ...(Array.isArray(depositAssets) ? depositAssets : []),
+    ...(Array.isArray(withdrawAssets) ? withdrawAssets : []),
+    ...(Array.isArray(assets) ? assets : []),
+  ]
+    .filter((value): value is string => typeof value === "string")
+    .map(normalizeAssetCode);
+  return Array.from(new Set(merged));
 }
 
 /** Anchors visible in the public directory, each with its most recent check status. */
@@ -26,6 +57,7 @@ export async function listPublicAnchorsWithStatus(db: Database): Promise<AnchorW
   const latestRuns = await db
     .selectDistinctOn([checkRuns.anchorId], {
       anchorId: checkRuns.anchorId,
+      checkRunId: checkRuns.id,
       status: checkRuns.status,
       startedAt: checkRuns.startedAt,
     })
@@ -35,12 +67,44 @@ export async function listPublicAnchorsWithStatus(db: Database): Promise<AnchorW
 
   const latestByAnchorId = new Map(latestRuns.map((run) => [run.anchorId, run]));
 
+  const latestRunIds = latestRuns
+    .map((run) => run.checkRunId)
+    .filter((id): id is string => id !== null);
+  const assetResults = latestRunIds.length
+    ? await db
+        .select({
+          checkRunId: sepCheckResults.checkRunId,
+          sepType: sepCheckResults.sepType,
+          rawResponse: sepCheckResults.rawResponse,
+        })
+        .from(sepCheckResults)
+        .where(
+          and(
+            inArray(sepCheckResults.checkRunId, latestRunIds),
+            inArray(sepCheckResults.sepType, ["sep6", "sep24", "sep38"]),
+          ),
+        )
+    : [];
+
+  const assetsByCheckRunId = new Map<string, Set<string>>();
+  for (const result of assetResults) {
+    const set = assetsByCheckRunId.get(result.checkRunId) ?? new Set<string>();
+    for (const asset of extractAssets(result.rawResponse)) {
+      set.add(asset);
+    }
+    assetsByCheckRunId.set(result.checkRunId, set);
+  }
+
   return visibleAnchors.map((anchor) => {
     const latest = latestByAnchorId.get(anchor.id);
+    const assets = latest?.checkRunId
+      ? Array.from(assetsByCheckRunId.get(latest.checkRunId) ?? [])
+      : [];
     return {
       ...anchor,
       latestStatus: latest?.status ?? null,
       lastCheckedAt: latest?.startedAt ?? null,
+      assets,
     };
   });
 }

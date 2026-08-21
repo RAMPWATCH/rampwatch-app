@@ -17,6 +17,7 @@ anchorsRouter.get("/anchors", async (_req, res) => {
         claimStatus: anchor.claimStatus,
         status: anchor.latestStatus,
         lastCheckedAt: anchor.lastCheckedAt,
+        assets: anchor.assets,
       })),
     });
   } catch (error) {
