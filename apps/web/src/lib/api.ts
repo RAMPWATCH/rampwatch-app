@@ -10,6 +10,7 @@ export interface AnchorSummary {
   claimStatus: "unclaimed" | "pending" | "claimed";
   status: CheckStatus | null;
   lastCheckedAt: string | null;
+  assets: string[];
 }
 
 export interface SepResult {
