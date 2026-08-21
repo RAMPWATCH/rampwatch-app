@@ -111,7 +111,12 @@ export async function listPublicAnchorsWithStatus(db: Database): Promise<AnchorW
 
 export interface AnchorDetail {
   anchor: Anchor;
-  uptimeHistory: { checkRunId: string; status: CheckRun["status"]; startedAt: Date }[];
+  uptimeHistory: {
+    checkRunId: string;
+    status: CheckRun["status"];
+    startedAt: Date;
+    avgLatencyMs: number | null;
+  }[];
   latestSepResults: {
     sepType: string;
     passed: boolean;
@@ -142,14 +147,19 @@ export async function getPublicAnchorDetail(
       checkRunId: checkRuns.id,
       status: checkRuns.status,
       startedAt: checkRuns.startedAt,
+      // Cast to int4 — Postgres numeric/avg() otherwise comes back from the
+      // driver as a string, not a JS number.
+      avgLatencyMs: sql<number | null>`round(avg(${sepCheckResults.latencyMs}))::int`,
     })
     .from(checkRuns)
+    .leftJoin(sepCheckResults, eq(sepCheckResults.checkRunId, checkRuns.id))
     .where(
       and(
         eq(checkRuns.anchorId, anchor.id),
         sql`${checkRuns.startedAt} >= ${windowStart.toISOString()}`,
       ),
     )
+    .groupBy(checkRuns.id)
     .orderBy(desc(checkRuns.startedAt));
 
   const latestRunId = uptimeHistory[0]?.checkRunId;
