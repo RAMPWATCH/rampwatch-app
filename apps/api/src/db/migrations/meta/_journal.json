@@ -57,6 +57,13 @@
       "when": 1787310461753,
       "tag": "0007_platform_settings",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1787310485532,
+      "tag": "0008_admin_audit_log",
+      "breakpoints": true
     }
   ]
 }
