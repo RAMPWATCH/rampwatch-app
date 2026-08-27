@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Changelog — RampWatch" };
+export const metadata: Metadata = { title: "Changelog — SEPGATE" };
 
 const ENTRIES = [
   {

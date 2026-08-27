@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Blog — RampWatch" };
+export const metadata: Metadata = { title: "Blog — SEPGATE" };
 
 const POSTS = [
   {
     slug: "launching-rampwatch",
-    title: "Launching RampWatch",
+    title: "Launching SEPGATE",
     date: "2026-08-21",
     excerpt:
       "Why we built an independent, always-on SEP compliance monitor for Stellar anchors — and why the on-demand checks are priced per call over x402 instead of behind a subscription.",
@@ -17,7 +17,7 @@ export default function BlogPage() {
     <main className="mx-auto max-w-3xl px-6 py-20">
       <p className="text-sm font-medium text-emerald-400">Blog</p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-50">
-        Notes from RampWatch
+        Notes from SEPGATE
       </h1>
       <div className="mt-10 space-y-8">
         {POSTS.map((post) => (

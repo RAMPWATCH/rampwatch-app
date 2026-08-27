@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Contact — RampWatch" };
+export const metadata: Metadata = { title: "Contact — SEPGATE" };
 
 export default function ContactPage() {
   return (
@@ -17,10 +17,10 @@ export default function ContactPage() {
             help claiming your listing?
           </p>
           <a
-            href="mailto:operators@rampwatch.app"
+            href="mailto:operators@sepgate.app"
             className="mt-1 inline-block text-sm text-emerald-400 hover:text-emerald-300"
           >
-            operators@rampwatch.app
+            operators@sepgate.app
           </a>
         </div>
         <div>
@@ -29,19 +29,19 @@ export default function ContactPage() {
             Found a vulnerability? Please report it responsibly.
           </p>
           <a
-            href="mailto:security@rampwatch.app"
+            href="mailto:security@sepgate.app"
             className="mt-1 inline-block text-sm text-emerald-400 hover:text-emerald-300"
           >
-            security@rampwatch.app
+            security@sepgate.app
           </a>
         </div>
         <div>
           <p className="text-sm font-medium text-slate-300">Everything else</p>
           <a
-            href="mailto:hello@rampwatch.app"
+            href="mailto:hello@sepgate.app"
             className="mt-1 inline-block text-sm text-emerald-400 hover:text-emerald-300"
           >
-            hello@rampwatch.app
+            hello@sepgate.app
           </a>
         </div>
       </div>

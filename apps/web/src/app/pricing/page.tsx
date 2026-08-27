@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getPricing } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Pricing — RampWatch",
+  title: "Pricing — SEPGATE",
 };
 
 function PlanCard({

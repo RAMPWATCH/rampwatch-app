@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { loginAction } from "@/app/actions/auth";
 
-export const metadata: Metadata = { title: "Sign in — RampWatch" };
+export const metadata: Metadata = { title: "Sign in — SEPGATE" };
 
 export default async function LoginPage({
   searchParams,

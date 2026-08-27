@@ -14,7 +14,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const anchor = await getAnchorDetail(slug);
-  return { title: anchor ? `${anchor.displayName ?? anchor.domain} — RampWatch` : "RampWatch" };
+  return { title: anchor ? `${anchor.displayName ?? anchor.domain} — SEPGATE` : "SEPGATE" };
 }
 
 export default async function AnchorDetailPage({ params }: PageProps) {

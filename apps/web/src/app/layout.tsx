@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "RampWatch",
+  title: "SEPGATE",
   description: "Stellar anchor compliance monitor, metered via x402.",
 };
 

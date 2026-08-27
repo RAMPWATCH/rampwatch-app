@@ -48,7 +48,7 @@ export default async function VerifyPage({
           the hood:
         </p>
         <pre className="mt-3 overflow-x-auto rounded-lg border border-slate-800 bg-slate-950 p-4 text-xs text-slate-300">
-          <code>{`curl -X POST https://api.rampwatch.app/api/v1/x402/verify-domain \\
+          <code>{`curl -X POST https://api.sepgate.app/api/v1/x402/verify-domain \\
   -H "Content-Type: application/json" \\
   -d '{"domain": "${domain ?? "anchor-domain.com"}"}'
 

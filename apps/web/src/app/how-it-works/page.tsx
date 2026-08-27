@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "How it works — RampWatch",
+  title: "How it works — SEPGATE",
 };
 
 function FlowStep({
@@ -35,7 +35,7 @@ export default function HowItWorksPage() {
         Two ways to get a compliance result
       </h1>
       <p className="mt-4 max-w-2xl text-slate-400">
-        RampWatch runs the same underlying checks either way — SEP-1
+        SEPGATE runs the same underlying checks either way — SEP-1
         stellar.toml validation, SEP-10 challenge verification, SEP-6/24
         endpoint schema checks, and SEP-38 quote validation. The only
         difference is who&apos;s waiting for the answer and how fresh it

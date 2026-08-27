@@ -13,7 +13,7 @@ export default async function HomePage() {
           Independent Stellar anchor monitoring
         </p>
         <h1 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-slate-50 sm:text-5xl">
-          RampWatch checks whether Stellar anchors actually implement SEP
+          SEPGATE checks whether Stellar anchors actually implement SEP
           compliance — not just claim to.
         </h1>
         <p className="mt-6 max-w-xl text-lg text-slate-400">

@@ -19,7 +19,7 @@ export async function Header() {
         <Link href="/" className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-emerald-400" />
           <span className="text-base font-semibold tracking-tight text-slate-100">
-            RampWatch
+            SEPGATE
           </span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-slate-400 sm:flex">

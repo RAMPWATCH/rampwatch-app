@@ -28,7 +28,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-2">
-            <p className="text-base font-semibold text-slate-100">RampWatch</p>
+            <p className="text-base font-semibold text-slate-100">SEPGATE</p>
             <p className="mt-2 max-w-xs text-sm text-slate-500">
               Independent SEP-1/6/10/24/38 compliance monitoring for Stellar
               anchors — free on a schedule, on-demand via x402.
@@ -53,7 +53,7 @@ export function Footer() {
           ))}
         </div>
         <p className="mt-10 text-xs text-slate-600">
-          © {new Date().getFullYear()} RampWatch. Not affiliated with the
+          © {new Date().getFullYear()} SEPGATE. Not affiliated with the
           Stellar Development Foundation.
         </p>
       </div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { signupAction } from "@/app/actions/auth";
 
-export const metadata: Metadata = { title: "Claim your anchor — RampWatch" };
+export const metadata: Metadata = { title: "Claim your anchor — SEPGATE" };
 
 export default async function SignupPage({
   searchParams,
