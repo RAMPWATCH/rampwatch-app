@@ -1,0 +1,25 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Monochrome version of the five-blade aperture seal -->
+  <defs>
+    <style>
+      @keyframes pulse {
+        0%, 100% { opacity: 0.9; }
+        50% { opacity: 1; }
+      }
+      .pulse { animation: pulse 2s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <!-- All blades in neutral gray -->
+  <path d="M 50 50 L 72 30 Q 80 35 78 50 Z" fill="#E8EEF7" opacity="0.7"/>
+  <path d="M 50 50 L 78 50 Q 80 65 72 70 Z" fill="#E8EEF7" opacity="0.5"/>
+  <path d="M 50 50 L 72 70 Q 65 80 50 78 Z" fill="#E8EEF7" opacity="0.7"/>
+  <path d="M 50 50 L 50 78 Q 35 80 28 70 Z" fill="#E8EEF7" opacity="0.5"/>
+  <path d="M 50 50 L 28 30 Q 35 20 50 22 Z" fill="#E8EEF7" opacity="0.7"/>
+
+  <!-- Center dot -->
+  <circle cx="50" cy="50" r="6" fill="#E8EEF7" class="pulse"/>
+
+  <!-- Hex border -->
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#E8EEF7" stroke-width="1" opacity="0.2"/>
+</svg>

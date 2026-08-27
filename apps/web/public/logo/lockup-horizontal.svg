@@ -1,0 +1,26 @@
+<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes pulse {
+        0%, 100% { opacity: 0.9; }
+        50% { opacity: 1; }
+      }
+      .pulse { animation: pulse 2s ease-in-out infinite; }
+      .wordmark { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 32px; fill: #E8EEF7; }
+    </style>
+  </defs>
+
+  <!-- Icon (left side) -->
+  <g transform="translate(20, 25)">
+    <path d="M 25 25 L 40 10 Q 45 13 43 25 Z" fill="#2F8FFF"/>
+    <path d="M 25 25 L 43 25 Q 45 35 40 37 Z" fill="#1B4D99"/>
+    <path d="M 25 25 L 40 37 Q 35 42 25 40 Z" fill="#2F8FFF"/>
+    <path d="M 25 25 L 25 40 Q 15 42 10 37 Z" fill="#1B4D99"/>
+    <path d="M 25 25 L 10 10 Q 15 8 25 12 Z" fill="#2F8FFF"/>
+    <circle cx="25" cy="25" r="3.5" fill="#2F8FFF" class="pulse"/>
+    <circle cx="25" cy="25" r="28" fill="none" stroke="#2F8FFF" stroke-width="0.5" opacity="0.15"/>
+  </g>
+
+  <!-- Wordmark (right side) -->
+  <text x="90" y="68" class="wordmark">SEPGATE</text>
+</svg>
