@@ -29,6 +29,7 @@ export const sessionOptions: SessionOptions = {
 
 export async function getSession(): Promise<IronSession<SessionData>> {
   const cookieStore = await cookies();
+  // @ts-expect-error iron-session types don't match Next.js 15 ReadonlyRequestCookies, but it works at runtime
   return getIronSession<SessionData>(cookieStore, sessionOptions);
 }
 

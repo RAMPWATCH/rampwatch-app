@@ -32,7 +32,7 @@ export async function operatorFetch<T>(
         ...init?.headers,
       },
       cache: "no-store",
-    });
+    } as RequestInit & { cache: string });
     const body = (await res.json().catch(() => null)) as
       | (T & { error?: string })
       | { error?: string }

@@ -21,7 +21,7 @@ async function callAuthEndpoint(
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, password }),
       cache: "no-store",
-    });
+    } as RequestInit & { cache: string });
     return (await res.json()) as AuthApiResponse;
   } catch (error) {
     console.error(`[auth] ${path} failed:`, error);
