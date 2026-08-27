@@ -20,7 +20,7 @@ if (!sessionSecret || sessionSecret.length < 32) {
 
 export const sessionOptions: SessionOptions = {
   password: sessionSecret,
-  cookieName: "rampwatch_session",
+  cookieName: "sepgate_session",
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
