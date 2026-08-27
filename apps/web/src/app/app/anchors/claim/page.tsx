@@ -10,7 +10,7 @@ import { Card } from "@/components/Card";
 
 interface ClaimStartResponse {
   anchor: { id: string; slug: string; domain: string };
-  verification: { id: string; token: string; method: "dns" | "well-known" };
+  verification: { id: string; token: string; method: "dns_txt" | "well_known_file" };
 }
 
 interface VerifyResponse {
@@ -24,7 +24,7 @@ export default function ClaimAnchorPage() {
   const [step, setStep] = useState<"form" | "verify">("form");
   const [domain, setDomain] = useState("");
   const [network, setNetwork] = useState<"mainnet" | "testnet">("mainnet");
-  const [method, setMethod] = useState<"dns" | "well-known">("dns");
+  const [method, setMethod] = useState<"dns_txt" | "well_known_file">("dns_txt");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [verificationData, setVerificationData] = useState<ClaimStartResponse | null>(null);
@@ -154,9 +154,9 @@ export default function ClaimAnchorPage() {
                   <label className="flex items-center">
                     <input
                       type="radio"
-                      value="dns"
-                      checked={method === "dns"}
-                      onChange={(e) => setMethod(e.target.value as "dns" | "well-known")}
+                      value="dns_txt"
+                      checked={method === "dns_txt"}
+                      onChange={(e) => setMethod(e.target.value as "dns_txt" | "well_known_file")}
                       className="mr-3"
                     />
                     <span className="text-text-primary">
@@ -166,9 +166,9 @@ export default function ClaimAnchorPage() {
                   <label className="flex items-center">
                     <input
                       type="radio"
-                      value="well-known"
-                      checked={method === "well-known"}
-                      onChange={(e) => setMethod(e.target.value as "dns" | "well-known")}
+                      value="well_known_file"
+                      checked={method === "well_known_file"}
+                      onChange={(e) => setMethod(e.target.value as "dns_txt" | "well_known_file")}
                       className="mr-3"
                     />
                     <span className="text-text-primary">
@@ -198,7 +198,7 @@ export default function ClaimAnchorPage() {
         <div className="mt-8">
           <h1 className="font-display text-3xl font-bold">Verify Domain Ownership</h1>
           <p className="mt-2 text-text-secondary">
-            {verificationData?.verification.method === "dns"
+            {verificationData?.verification.method === "dns_txt"
               ? "Add a DNS TXT record to verify ownership"
               : "Add a file to your .well-known directory to verify ownership"}
           </p>
@@ -216,12 +216,12 @@ export default function ClaimAnchorPage() {
               <>
                 <div>
                   <h3 className="font-semibold text-text-primary">
-                    {verificationData.verification.method === "dns"
+                    {verificationData.verification.method === "dns_txt"
                       ? "DNS TXT Record"
                       : "Well-Known File"}
                   </h3>
                   <p className="mt-2 text-sm text-text-secondary">
-                    {verificationData.verification.method === "dns"
+                    {verificationData.verification.method === "dns_txt"
                       ? `Add a TXT record at _sepgate-verify.${verificationData.anchor.domain}`
                       : `Create a file at https://${verificationData.anchor.domain}/.well-known/sepgate-verify.txt`}
                   </p>

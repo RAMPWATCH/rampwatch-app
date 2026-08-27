@@ -180,7 +180,7 @@ operatorRouter.post("/operator/anchors/:slug/verify", async (req, res) => {
     }
 
     let checkResult;
-    if (verification.method === "dns") {
+    if (verification.method === "dns_txt") {
       checkResult = await checkDnsTxt(anchor.domain, verification.verificationToken);
     } else {
       checkResult = await checkWellKnownFile(anchor.domain, verification.verificationToken);

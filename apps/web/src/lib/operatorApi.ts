@@ -1,5 +1,6 @@
 import "server-only";
-import type { AuthenticatedSession } from "./session";
+import type { IronSession } from "iron-session";
+import type { SessionData } from "./session";
 
 const API_URL = process.env.API_URL ?? "http://localhost:4000";
 const INTERNAL_API_SECRET = process.env.INTERNAL_API_SECRET;
@@ -23,7 +24,7 @@ export interface OperatorApiResult<T> {
  */
 export async function operatorFetch<T>(
   path: string,
-  session: AuthenticatedSession,
+  session: IronSession<SessionData>,
   init?: RequestInit,
 ): Promise<OperatorApiResult<T>> {
   try {
