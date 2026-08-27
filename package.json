@@ -10,8 +10,8 @@
     "typecheck": "pnpm -r --if-present run typecheck",
     "test": "pnpm -r --if-present run test",
     "build": "pnpm -r --if-present run build",
-    "db:generate": "pnpm --filter @rampwatch/api db:generate",
-    "db:migrate": "pnpm --filter @rampwatch/api db:migrate"
+    "db:generate": "pnpm --filter @sepgate/api db:generate",
+    "db:migrate": "pnpm --filter @sepgate/api db:migrate"
   },
   "devDependencies": {
     "typescript": "^5.6.3"
