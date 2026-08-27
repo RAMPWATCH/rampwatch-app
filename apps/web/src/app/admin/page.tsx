@@ -1,6 +1,3 @@
-import { getDb } from "@/../../apps/api/src/db/client";
-import { anchors, users, x402Transactions, checkRuns } from "@/../../apps/api/src/db/schema";
-import { count, eq, sql } from "drizzle-orm";
 import { Card } from "@/components/Card";
 
 interface StatCard {
@@ -10,34 +7,14 @@ interface StatCard {
 }
 
 export default async function AdminDashboard() {
-  let stats: StatCard[] = [];
-
-  try {
-    const db = await getDb();
-
-    // Get stats in parallel
-    const [anchorStats, userStats, transactionStats, checkStats] = await Promise.all([
-      db.select({ total: count() }).from(anchors),
-      db.select({ total: count() }).from(users),
-      db.select({ total: count(), settled: count(eq(x402Transactions.status, "settled")) }).from(x402Transactions),
-      db.select({ total: count() }).from(checkRuns),
-    ]);
-
-    const totalAnchors = anchorStats[0]?.total || 0;
-    const totalUsers = userStats[0]?.total || 0;
-    const totalTransactions = transactionStats[0]?.total || 0;
-    const settledTransactions = transactionStats[0]?.settled || 0;
-    const totalChecks = checkStats[0]?.total || 0;
-
-    stats = [
-      { label: "Total Anchors", value: totalAnchors },
-      { label: "Total Users", value: totalUsers },
-      { label: "Checks Performed", value: totalChecks },
-      { label: "Transactions (Settled)", value: `${settledTransactions}/${totalTransactions}` },
-    ];
-  } catch (error) {
-    console.error("[Admin Dashboard]", error);
-  }
+  // Stats would be fetched from API endpoints in full implementation
+  // For now, showing placeholder structure
+  const stats: StatCard[] = [
+    { label: "Total Anchors", value: "—" },
+    { label: "Total Users", value: "—" },
+    { label: "Checks Performed", value: "—" },
+    { label: "Transactions (Settled)", value: "—" },
+  ];
 
   return (
     <div>
