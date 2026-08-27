@@ -10,24 +10,24 @@ const SEP_LABELS: Record<string, string> = {
 
 export function SepCheckRow({ result }: { result: SepResult }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-b border-slate-800 py-3 last:border-b-0">
+    <div className="flex items-center justify-between gap-4 border-b border-border-subtle py-3 last:border-b-0">
       <div className="min-w-0">
         <p className="truncate text-sm font-medium text-slate-200">
           {SEP_LABELS[result.sepType] ?? result.sepType}
         </p>
         {result.errorDetail && (
-          <p className="mt-0.5 truncate text-xs text-rose-400">{result.errorDetail}</p>
+          <p className="mt-0.5 truncate text-xs text-status-down">{result.errorDetail}</p>
         )}
       </div>
       <div className="flex shrink-0 items-center gap-3 text-sm">
         {result.latencyMs !== null && (
-          <span className="tabular-nums text-slate-500">{result.latencyMs}ms</span>
+          <span className="tabular-nums text-text-secondary">{result.latencyMs}ms</span>
         )}
         <span
           className={
             result.passed
-              ? "rounded-full bg-emerald-400/10 px-2 py-0.5 text-xs font-medium text-emerald-300"
-              : "rounded-full bg-rose-400/10 px-2 py-0.5 text-xs font-medium text-rose-300"
+              ? "rounded-full bg-status-operational/10 px-2 py-0.5 text-xs font-medium text-emerald-300"
+              : "rounded-full bg-status-down/10 px-2 py-0.5 text-xs font-medium text-rose-300"
           }
         >
           {result.passed ? "Pass" : "Fail"}

@@ -18,14 +18,14 @@ export default async function LoginPage({
       </h1>
 
       {error && (
-        <p className="mt-4 rounded-md border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm text-rose-300">
+        <p className="mt-4 rounded-md border border-rose-500/30 bg-status-down/10 px-3 py-2 text-sm text-rose-300">
           {error}
         </p>
       )}
 
       <form action={loginAction} className="mt-6 space-y-4">
         <div>
-          <label htmlFor="email" className="text-sm text-slate-400">
+          <label htmlFor="email" className="text-sm text-text-secondary">
             Email
           </label>
           <input
@@ -33,11 +33,11 @@ export default async function LoginPage({
             name="email"
             type="email"
             required
-            className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:border-emerald-500 focus:outline-none"
+            className="mt-1 w-full rounded-md border border-border-subtle bg-bg-secondary px-3 py-2 text-sm text-text-primary focus:border-emerald-500 focus:outline-none"
           />
         </div>
         <div>
-          <label htmlFor="password" className="text-sm text-slate-400">
+          <label htmlFor="password" className="text-sm text-text-secondary">
             Password
           </label>
           <input
@@ -45,20 +45,20 @@ export default async function LoginPage({
             name="password"
             type="password"
             required
-            className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:border-emerald-500 focus:outline-none"
+            className="mt-1 w-full rounded-md border border-border-subtle bg-bg-secondary px-3 py-2 text-sm text-text-primary focus:border-emerald-500 focus:outline-none"
           />
         </div>
         <button
           type="submit"
-          className="w-full rounded-md bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+          className="w-full rounded-md bg-status-operational px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-status-operational"
         >
           Sign in
         </button>
       </form>
 
-      <p className="mt-6 text-sm text-slate-500">
+      <p className="mt-6 text-sm text-text-secondary">
         Don&apos;t have an account?{" "}
-        <Link href="/signup" className="text-slate-300 underline underline-offset-2">
+        <Link href="/signup" className="text-text-primary underline underline-offset-2">
           Create one
         </Link>
       </p>

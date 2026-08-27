@@ -15,6 +15,7 @@ const config: Config = {
         "accent-glow": "var(--accent-glow)",
         "text-primary": "var(--text-primary)",
         "text-secondary": "var(--text-secondary)",
+        "text-tertiary": "var(--text-tertiary)",
         "text-disabled": "var(--text-disabled)",
         "status-operational": "var(--status-operational)",
         "status-degraded": "var(--status-degraded)",

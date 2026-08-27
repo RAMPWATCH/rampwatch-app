@@ -24,15 +24,15 @@ const SECTIONS = [
 export default function SecurityPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-20">
-      <p className="text-sm font-medium text-emerald-400">Security</p>
+      <p className="text-sm font-medium text-status-operational">Security</p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-50">
         What SEPGATE does — and deliberately doesn&apos;t do
       </h1>
       <div className="mt-10 space-y-8">
         {SECTIONS.map((section) => (
           <section key={section.title}>
-            <h2 className="text-base font-semibold text-slate-100">{section.title}</h2>
-            <p className="mt-2 text-sm text-slate-400">{section.body}</p>
+            <h2 className="text-base font-semibold text-text-primary">{section.title}</h2>
+            <p className="mt-2 text-sm text-text-secondary">{section.body}</p>
           </section>
         ))}
       </div>

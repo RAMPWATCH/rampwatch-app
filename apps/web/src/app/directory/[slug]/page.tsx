@@ -37,7 +37,7 @@ export default async function AnchorDetailPage({ params }: PageProps) {
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-16">
-      <Link href="/directory" className="text-sm text-slate-500 hover:text-slate-300">
+      <Link href="/directory" className="text-sm text-text-secondary hover:text-text-primary">
         ← Back to directory
       </Link>
 
@@ -46,31 +46,31 @@ export default async function AnchorDetailPage({ params }: PageProps) {
           <h1 className="text-3xl font-semibold tracking-tight text-slate-50">
             {anchor.displayName ?? anchor.domain}
           </h1>
-          <p className="mt-1 text-sm text-slate-500">{anchor.domain}</p>
+          <p className="mt-1 text-sm text-text-secondary">{anchor.domain}</p>
           <div className="mt-3 flex items-center gap-3">
             <StatusBadge status={latestStatus} />
-            <span className="rounded-full border border-slate-700 px-2 py-0.5 text-[10px] uppercase tracking-wide text-slate-500">
+            <span className="rounded-full border border-border-subtle px-2 py-0.5 text-[10px] uppercase tracking-wide text-text-secondary">
               {anchor.network}
             </span>
             {anchor.claimStatus === "claimed" && (
-              <span className="text-xs text-slate-500">Claimed by operator</span>
+              <span className="text-xs text-text-secondary">Claimed by operator</span>
             )}
           </div>
         </div>
         <Link
           href={`/verify?domain=${encodeURIComponent(anchor.domain)}`}
-          className="shrink-0 rounded-md bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+          className="shrink-0 rounded-md bg-status-operational px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-status-operational"
         >
           Run a fresh check
         </Link>
       </div>
 
-      <section className="mt-10 rounded-lg border border-slate-800 bg-slate-900/30 p-6">
+      <section className="mt-10 rounded-lg border border-border-subtle bg-bg-secondary/30 p-6">
         <div className="flex items-baseline justify-between">
-          <h2 className="text-sm font-medium text-slate-300">
+          <h2 className="text-sm font-medium text-text-primary">
             90-day uptime{uptimePercent !== null ? ` — ${uptimePercent}% operational` : ""}
           </h2>
-          <span className="text-xs text-slate-600">
+          <span className="text-xs text-text-tertiary">
             {anchor.uptimeHistory.length} checks in this window
           </span>
         </div>
@@ -78,24 +78,24 @@ export default async function AnchorDetailPage({ params }: PageProps) {
           {anchor.uptimeHistory.length > 0 ? (
             <UptimeStrip history={anchor.uptimeHistory} />
           ) : (
-            <p className="text-sm text-slate-500">No checks recorded yet.</p>
+            <p className="text-sm text-text-secondary">No checks recorded yet.</p>
           )}
         </div>
       </section>
 
-      <section className="mt-6 rounded-lg border border-slate-800 bg-slate-900/30 p-6">
+      <section className="mt-6 rounded-lg border border-border-subtle bg-bg-secondary/30 p-6">
         <LatencyChart history={anchor.uptimeHistory} />
       </section>
 
-      <section className="mt-6 rounded-lg border border-slate-800 bg-slate-900/30 p-6">
-        <h2 className="text-sm font-medium text-slate-300">Latest SEP breakdown</h2>
+      <section className="mt-6 rounded-lg border border-border-subtle bg-bg-secondary/30 p-6">
+        <h2 className="text-sm font-medium text-text-primary">Latest SEP breakdown</h2>
         <div className="mt-3">
           {anchor.latestSepResults.length > 0 ? (
             anchor.latestSepResults.map((result) => (
               <SepCheckRow key={result.sepType} result={result} />
             ))
           ) : (
-            <p className="text-sm text-slate-500">No check results yet.</p>
+            <p className="text-sm text-text-secondary">No check results yet.</p>
           )}
         </div>
       </section>

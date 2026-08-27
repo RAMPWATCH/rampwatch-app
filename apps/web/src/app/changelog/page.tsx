@@ -18,25 +18,25 @@ const ENTRIES = [
 export default function ChangelogPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-20">
-      <p className="text-sm font-medium text-emerald-400">Changelog</p>
+      <p className="text-sm font-medium text-status-operational">Changelog</p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-50">
         What&apos;s shipped
       </h1>
       <div className="mt-10 space-y-10">
         {ENTRIES.map((entry) => (
           <section key={entry.date}>
-            <p className="text-xs text-slate-600">
+            <p className="text-xs text-text-tertiary">
               {new Date(entry.date).toLocaleDateString(undefined, {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
             </p>
-            <h2 className="mt-1 text-base font-semibold text-slate-100">{entry.title}</h2>
+            <h2 className="mt-1 text-base font-semibold text-text-primary">{entry.title}</h2>
             <ul className="mt-3 space-y-1.5">
               {entry.items.map((item) => (
-                <li key={item} className="flex gap-2 text-sm text-slate-400">
-                  <span className="text-emerald-400">+</span>
+                <li key={item} className="flex gap-2 text-sm text-text-secondary">
+                  <span className="text-status-operational">+</span>
                   {item}
                 </li>
               ))}

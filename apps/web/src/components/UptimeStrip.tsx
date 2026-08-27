@@ -1,9 +1,9 @@
 import type { CheckStatus } from "@/lib/api";
 
 const STATUS_FILL: Record<CheckStatus, string> = {
-  operational: "#34d399", // emerald-400
-  degraded: "#fbbf24", // amber-400
-  down: "#fb7185", // rose-400
+  operational: "#34d399", // status-operational
+  degraded: "#fbbf24", // status-degraded
+  down: "#fb7185", // status-down
 };
 
 const STATUS_LABEL: Record<CheckStatus, string> = {
@@ -53,7 +53,7 @@ export function UptimeStrip({ history }: { history: HistoryEntry[] }) {
           </rect>
         ))}
       </svg>
-      <div className="mt-3 flex items-center gap-4 text-xs text-slate-500">
+      <div className="mt-3 flex items-center gap-4 text-xs text-text-secondary">
         {(Object.keys(STATUS_LABEL) as CheckStatus[]).map((status) => (
           <span key={status} className="flex items-center gap-1.5">
             <span

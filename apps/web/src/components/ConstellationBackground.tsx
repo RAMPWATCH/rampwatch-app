@@ -6,13 +6,14 @@ export function ConstellationBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas to fill viewport
     const updateSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -20,14 +21,12 @@ export function ConstellationBackground() {
     updateSize();
     window.addEventListener("resize", updateSize);
 
-    // Configuration
     const dotRadius = 1.5;
     const dotCount = Math.floor((canvas.width * canvas.height) / 50000);
     const connectionDistance = 150;
     const dotColor = "rgba(47, 143, 255, 0.3)";
     const lineColor = "rgba(47, 143, 255, 0.08)";
 
-    // Create dots with random positions and velocities
     interface Dot {
       x: number;
       y: number;
@@ -44,25 +43,20 @@ export function ConstellationBackground() {
       });
     }
 
-    // Check if motion should be reduced
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
     let animationId: number;
 
     const draw = () => {
-      // Clear canvas
-      ctx.fillStyle = "rgba(7, 10, 15, 0)"; // Transparent to show bg
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update dot positions (if motion is not reduced)
       if (!prefersReducedMotion) {
         for (const dot of dots) {
           dot.x += dot.vx;
           dot.y += dot.vy;
 
-          // Wrap around edges
           if (dot.x < 0) dot.x = canvas.width;
           if (dot.x > canvas.width) dot.x = 0;
           if (dot.y < 0) dot.y = canvas.height;
@@ -70,25 +64,27 @@ export function ConstellationBackground() {
         }
       }
 
-      // Draw connecting lines
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 1;
       for (let i = 0; i < dots.length; i++) {
+        const dotI = dots[i];
+        if (!dotI) continue;
         for (let j = i + 1; j < dots.length; j++) {
-          const dx = dots[i].x - dots[j].x;
-          const dy = dots[i].y - dots[j].y;
+          const dotJ = dots[j];
+          if (!dotJ) continue;
+          const dx = dotI.x - dotJ.x;
+          const dy = dotI.y - dotJ.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
             ctx.beginPath();
-            ctx.moveTo(dots[i].x, dots[i].y);
-            ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.moveTo(dotI.x, dotI.y);
+            ctx.lineTo(dotJ.x, dotJ.y);
             ctx.stroke();
           }
         }
       }
 
-      // Draw dots
       ctx.fillStyle = dotColor;
       for (const dot of dots) {
         ctx.beginPath();

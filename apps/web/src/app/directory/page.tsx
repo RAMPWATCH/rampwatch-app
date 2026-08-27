@@ -46,12 +46,12 @@ function FilterSelect({
   options: { value: string; label: string }[];
 }) {
   return (
-    <label className="flex flex-col gap-1 text-xs text-slate-500">
+    <label className="flex flex-col gap-1 text-xs text-text-secondary">
       {label}
       <select
         name={name}
         defaultValue={value}
-        className="rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+        className="rounded-md border border-border-subtle bg-bg-secondary px-3 py-2 text-sm text-text-primary focus:border-emerald-500 focus:outline-none"
       >
         <option value="">All</option>
         {options.map((option) => (
@@ -77,20 +77,20 @@ export default async function DirectoryPage({
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
-      <p className="text-sm font-medium text-emerald-400">Directory</p>
+      <p className="text-sm font-medium text-status-operational">Directory</p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-50">
         Every anchor SEPGATE monitors
       </h1>
-      <p className="mt-3 max-w-2xl text-slate-400">
+      <p className="mt-3 max-w-2xl text-text-secondary">
         Cached from the most recent scheduled check — always free to browse.
         Need a live result instead?{" "}
-        <Link href="/verify" className="text-slate-300 underline underline-offset-2">
+        <Link href="/verify" className="text-text-primary underline underline-offset-2">
           Run one on demand
         </Link>
         .
       </p>
 
-      <form className="mt-8 flex flex-wrap gap-4 rounded-lg border border-slate-800 bg-slate-900/30 p-4">
+      <form className="mt-8 flex flex-wrap gap-4 rounded-lg border border-border-subtle bg-bg-secondary/30 p-4">
         <FilterSelect
           name="status"
           label="Status"
@@ -130,7 +130,7 @@ export default async function DirectoryPage({
           </button>
           <Link
             href="/directory"
-            className="rounded-md border border-slate-700 px-4 py-2 text-sm text-slate-300 transition hover:border-slate-600"
+            className="rounded-md border border-border-subtle px-4 py-2 text-sm text-text-primary transition hover:border-border-subtle"
           >
             Clear
           </Link>
@@ -138,7 +138,7 @@ export default async function DirectoryPage({
       </form>
 
       {filtered.length === 0 ? (
-        <p className="mt-16 text-center text-sm text-slate-500">
+        <p className="mt-16 text-center text-sm text-text-secondary">
           No anchors match those filters.
         </p>
       ) : (
@@ -147,27 +147,27 @@ export default async function DirectoryPage({
               <Link
                 key={anchor.slug}
                 href={`/directory/${anchor.slug}`}
-                className="block rounded-lg border border-slate-800 bg-slate-900/30 p-5 transition hover:border-slate-700"
+                className="block rounded-lg border border-border-subtle bg-bg-secondary/30 p-5 transition hover:border-border-subtle"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-slate-100">
+                    <p className="truncate text-sm font-medium text-text-primary">
                       {anchor.displayName ?? anchor.domain}
                     </p>
-                    <p className="mt-1 truncate text-xs text-slate-500">{anchor.domain}</p>
+                    <p className="mt-1 truncate text-xs text-text-secondary">{anchor.domain}</p>
                   </div>
-                  <span className="shrink-0 rounded-full border border-slate-700 px-2 py-0.5 text-[10px] uppercase tracking-wide text-slate-500">
+                  <span className="shrink-0 rounded-full border border-border-subtle px-2 py-0.5 text-[10px] uppercase tracking-wide text-text-secondary">
                     {anchor.network}
                   </span>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <StatusBadge status={anchor.status} />
                   {anchor.claimStatus === "claimed" && (
-                    <span className="text-xs text-slate-500">Claimed</span>
+                    <span className="text-xs text-text-secondary">Claimed</span>
                   )}
                 </div>
                 {anchor.assets.length > 0 && (
-                  <p className="mt-3 truncate text-xs text-slate-600">
+                  <p className="mt-3 truncate text-xs text-text-tertiary">
                     {anchor.assets.slice(0, 5).join(" · ")}
                   </p>
                 )}

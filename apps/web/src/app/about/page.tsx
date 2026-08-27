@@ -5,11 +5,11 @@ export const metadata: Metadata = { title: "About — SEPGATE" };
 export default function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-20">
-      <p className="text-sm font-medium text-emerald-400">About</p>
+      <p className="text-sm font-medium text-status-operational">About</p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-50">
         SEP compliance is a claim. SEPGATE checks it.
       </h1>
-      <div className="mt-8 space-y-6 text-slate-400">
+      <div className="mt-8 space-y-6 text-text-secondary">
         <p>
           A Stellar anchor&apos;s stellar.toml can say it supports SEP-6, SEP-24,
           or SEP-38 — but whether those endpoints actually work, respond

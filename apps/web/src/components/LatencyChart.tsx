@@ -12,7 +12,7 @@ export function LatencyChart({ history }: { history: LatencyEntry[] }) {
   const chronological = [...history].reverse().filter((entry) => entry.avgLatencyMs !== null);
 
   if (chronological.length === 0) {
-    return <p className="text-sm text-slate-500">No latency data yet.</p>;
+    return <p className="text-sm text-text-secondary">No latency data yet.</p>;
   }
 
   const maxLatency = Math.max(...chronological.map((entry) => entry.avgLatencyMs ?? 0), 1);
@@ -23,8 +23,8 @@ export function LatencyChart({ history }: { history: LatencyEntry[] }) {
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <p className="text-xs text-slate-500">Average latency per check</p>
-        <p className="tabular-nums text-xs text-slate-400">
+        <p className="text-xs text-text-secondary">Average latency per check</p>
+        <p className="tabular-nums text-xs text-text-secondary">
           latest: {last.avgLatencyMs}ms
         </p>
       </div>

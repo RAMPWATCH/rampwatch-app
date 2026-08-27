@@ -29,18 +29,18 @@ function PlanCard({
     <div
       className={
         highlighted
-          ? "rounded-xl border border-emerald-500/40 bg-emerald-500/[0.03] p-6"
-          : "rounded-xl border border-slate-800 bg-slate-900/30 p-6"
+          ? "rounded-xl border border-emerald-500/40 bg-status-operational/[0.03] p-6"
+          : "rounded-xl border border-border-subtle bg-bg-secondary/30 p-6"
       }
     >
-      <p className="text-sm font-medium text-slate-300">{name}</p>
+      <p className="text-sm font-medium text-text-primary">{name}</p>
       <p className="mt-3 text-3xl font-semibold text-slate-50">{price}</p>
-      <p className="mt-1 text-xs text-slate-500">{priceNote}</p>
-      <p className="mt-4 text-sm text-slate-400">{description}</p>
+      <p className="mt-1 text-xs text-text-secondary">{priceNote}</p>
+      <p className="mt-4 text-sm text-text-secondary">{description}</p>
       <ul className="mt-6 space-y-2.5">
         {features.map((feature) => (
-          <li key={feature} className="flex gap-2 text-sm text-slate-400">
-            <span className="text-emerald-400">✓</span>
+          <li key={feature} className="flex gap-2 text-sm text-text-secondary">
+            <span className="text-status-operational">✓</span>
             {feature}
           </li>
         ))}
@@ -49,8 +49,8 @@ function PlanCard({
         href={ctaHref}
         className={
           highlighted
-            ? "mt-8 block rounded-md bg-emerald-500 px-4 py-2.5 text-center text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
-            : "mt-8 block rounded-md border border-slate-700 px-4 py-2.5 text-center text-sm font-medium text-slate-200 transition hover:border-slate-600"
+            ? "mt-8 block rounded-md bg-status-operational px-4 py-2.5 text-center text-sm font-semibold text-slate-950 transition hover:bg-status-operational"
+            : "mt-8 block rounded-md border border-border-subtle px-4 py-2.5 text-center text-sm font-medium text-text-primary transition hover:border-border-subtle"
         }
       >
         {cta}
@@ -64,11 +64,11 @@ export default async function PricingPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-20">
-      <p className="text-sm font-medium text-emerald-400">Pricing</p>
+      <p className="text-sm font-medium text-status-operational">Pricing</p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-50">
         Free to browse. Pay only for a fresh answer.
       </h1>
-      <p className="mt-4 max-w-2xl text-slate-400">
+      <p className="mt-4 max-w-2xl text-text-secondary">
         The public directory is never gated behind payment — only on-demand,
         live checks are. Prices below are live from the platform config.
       </p>
@@ -119,10 +119,10 @@ export default async function PricingPage() {
         />
       </div>
 
-      <p className="mt-10 text-sm text-slate-500">
+      <p className="mt-10 text-sm text-text-secondary">
         Building an integration or an agent that needs to call these
         directly?{" "}
-        <Link href="/docs" className="text-slate-300 underline underline-offset-2">
+        <Link href="/docs" className="text-text-primary underline underline-offset-2">
           Read the API docs
         </Link>
         .
