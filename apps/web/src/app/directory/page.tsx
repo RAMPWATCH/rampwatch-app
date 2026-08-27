@@ -4,7 +4,7 @@ import { getAnchors, type AnchorSummary, type CheckStatus } from "@/lib/api";
 import { StatusBadge } from "@/components/StatusBadge";
 
 export const metadata: Metadata = {
-  title: "Directory — RampWatch",
+  title: "Directory — SEPGATE",
 };
 
 interface DirectorySearchParams {
@@ -79,7 +79,7 @@ export default async function DirectoryPage({
     <main className="mx-auto max-w-6xl px-6 py-16">
       <p className="text-sm font-medium text-emerald-400">Directory</p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-50">
-        Every anchor RampWatch monitors
+        Every anchor SEPGATE monitors
       </h1>
       <p className="mt-3 max-w-2xl text-slate-400">
         Cached from the most recent scheduled check — always free to browse.
