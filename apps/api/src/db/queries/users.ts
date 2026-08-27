@@ -38,3 +38,7 @@ export async function createUser(db: Database, params: CreateUserParams): Promis
 export async function touchLastLogin(db: Database, userId: string): Promise<void> {
   await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, userId));
 }
+
+export async function updateUserPassword(db: Database, userId: string, passwordHash: string): Promise<void> {
+  await db.update(users).set({ passwordHash }).where(eq(users.id, userId));
+}
