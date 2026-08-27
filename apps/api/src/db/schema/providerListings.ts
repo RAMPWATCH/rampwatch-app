@@ -1,8 +1,6 @@
 import { pgTable, uuid, text, numeric, boolean, timestamp, foreignKey } from "drizzle-orm/pg-core";
 import { providers } from "./providers";
-
-export const networkValues = ["mainnet", "testnet"] as const;
-export type Network = (typeof networkValues)[number];
+import type { Network } from "./anchors";
 
 export const providerListings = pgTable("provider_listings", {
   id: uuid("id").primaryKey().defaultRandom(),
