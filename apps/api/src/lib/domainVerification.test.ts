@@ -10,7 +10,7 @@ describe("generateVerificationToken", () => {
     const a = generateVerificationToken();
     const b = generateVerificationToken();
     expect(a).not.toBe(b);
-    expect(a).toMatch(/^rampwatch-verify-[a-f0-9]{32}$/);
+    expect(a).toMatch(/^sepgate-verify-[a-f0-9]{32}$/);
   });
 });
 

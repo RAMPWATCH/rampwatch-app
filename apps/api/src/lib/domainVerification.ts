@@ -1,11 +1,11 @@
 import { promises as dns } from "node:dns";
 import { fetchText } from "../checks/http";
 
-export const VERIFICATION_TXT_PREFIX = "_rampwatch-verify";
-export const VERIFICATION_WELL_KNOWN_PATH = "/.well-known/rampwatch-verify.txt";
+export const VERIFICATION_TXT_PREFIX = "_sepgate-verify";
+export const VERIFICATION_WELL_KNOWN_PATH = "/.well-known/sepgate-verify.txt";
 
 export function generateVerificationToken(): string {
-  return `rampwatch-verify-${crypto.randomUUID().replace(/-/g, "")}`;
+  return `sepgate-verify-${crypto.randomUUID().replace(/-/g, "")}`;
 }
 
 export interface VerificationCheckResult {
@@ -13,7 +13,7 @@ export interface VerificationCheckResult {
   detail: string;
 }
 
-/** Looks for `token` in a TXT record at _rampwatch-verify.<domain>. Never throws. */
+/** Looks for `token` in a TXT record at _sepgate-verify.<domain>. Never throws. */
 export async function checkDnsTxt(
   domain: string,
   token: string,
@@ -33,7 +33,7 @@ export async function checkDnsTxt(
   }
 }
 
-/** Looks for `token` as the exact content of https://<domain>/.well-known/rampwatch-verify.txt. */
+/** Looks for `token` as the exact content of https://<domain>/.well-known/sepgate-verify.txt. */
 export async function checkWellKnownFile(
   domain: string,
   token: string,
