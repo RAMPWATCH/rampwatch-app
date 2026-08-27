@@ -1,0 +1,45 @@
+services:
+  - type: pserv
+    name: sepgate-api
+    env: node
+    plan: starter
+    buildCommand: pnpm install && pnpm run db:generate && pnpm run build
+    startCommand: pnpm run start --filter @sepgate/api
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sepgate-db
+          property: connectionString
+      - key: INTERNAL_API_SECRET
+        sync: false
+        description: Shared secret for web ↔ API calls (min 32 chars)
+      - key: STELLAR_PAYTO_ADDRESS
+        description: Stellar keypair to receive x402 payments (optional, seeded if missing)
+      - key: SESSION_SECRET
+        description: Session encryption secret (min 32 chars, shared with web)
+
+  - type: pserv
+    name: sepgate-web
+    env: node
+    plan: starter
+    buildCommand: pnpm install && pnpm run build --filter @sepgate/web
+    startCommand: pnpm run start --filter @sepgate/web
+    envVars:
+      - key: API_URL
+        value: ${{ services.sepgate-api.url }}
+      - key: INTERNAL_API_SECRET
+        sync: false
+        description: Shared secret (must match API)
+      - key: SESSION_SECRET
+        description: Session encryption secret (must match API)
+
+databases:
+  - name: sepgate-db
+    plan: starter
+    databaseName: sepgate_production
+    postgresMajorVersion: "16"
+    initialDatabaseName: sepgate_production

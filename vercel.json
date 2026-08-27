@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/web/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "apps/web/$1"
+    }
+  ],
+  "env": {
+    "API_URL": {
+      "description": "Internal API URL (e.g., http://localhost:4000 or https://api.sepgate.app)",
+      "required": true
+    },
+    "INTERNAL_API_SECRET": {
+      "description": "Shared secret for server-to-server API calls (min 32 chars)",
+      "required": true
+    },
+    "SESSION_SECRET": {
+      "description": "Session encryption secret (min 32 chars)",
+      "required": true
+    }
+  }
+}
